@@ -1,0 +1,23 @@
+version: '3.7'
+services:
+
+  java:
+    build:
+     context: ./
+    ports:
+      - "8082:8082"
+    container_name: java
+    links:
+      - mongo
+    depends_on:
+      - mongo
+
+  ## Mongo Docker Compose Config
+  mongo:
+    container_name: mongo
+    image: mongo:latest
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - /home/sinoed/data/db:/data/db
